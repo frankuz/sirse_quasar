@@ -14,7 +14,7 @@ function objectsDiff (newO, oldO) {
   const diff = {}
   for (const key in newO) {
     if (typeof newO[key] === 'object') {
-      if (JSON.stringify(newO[key]) !== JSON.stringify(oldO[key])) diff[key] = JSON.stringify(newO[key])
+      if (JSON.stringify(newO[key]) !== JSON.stringify(oldO[key])) diff[key] = newO[key]
     } else if (newO[key] !== oldO[key]) diff[key] = newO[key]
   }
   return diff
@@ -74,7 +74,7 @@ const localRunner = {
       create: function () {
         // console.info('read',tbl,val)
         const res = JSON.stringify({ data: { values: { negocio: 'Galletas', nombre: 'Sin nombre', categorias: '[]', uuid: 89 }, Id: Math.round(Math.random() * 10000) } })
-        setTimeout(() => callback(res), 500)
+        setTimeout(() => callback(res), 50)
       },
       createBatch: function (entity, data) {
         // console.info('read',tbl,val)

@@ -93,11 +93,8 @@ function mostrarIniciativa (iniciativa) {
   app.activePage = 'formIniciativa'
 }
 function crearIniciativa () {
-  app.iniciativaActiva = {}
-  app.iniciativaEditable = {}
-  app.iniciativaEditable.negocio = app.negocioActivo
-  app.iniciativaEditable.categorias = []
-  app.iniciativaEditable.userMail = app.userMail
+  app.iniciativaActiva = { negocio: app.negocioActivo, categorias: [] }
+  app.iniciativaEditable = { ...app.iniciativaActiva }
   app.activePage = 'formIniciativa'
 }
 </script>
