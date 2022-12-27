@@ -1,10 +1,10 @@
 <template>
-  <q-dialog v-model="app.waitingMsgIsVisible">
-    <q-card style="max-width: 500px">
+  <q-dialog persistent v-model="app.waitingMsgIsVisible">
+    <q-card style="width: 500px">
       <q-card-section class="q-pt-none text-center">
         <q-spinner-ios
           color="primary"
-          size="5em"
+          size="5rem"
           :thickness="3"
           class="q-my-lg"
         />
