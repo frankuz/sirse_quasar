@@ -8,9 +8,9 @@ function arrayToObjects ({ values, fields }) {
   const output = []
   values.forEach(record => {
     const newObj = {}
-    fields.forEach((field, i) => {
-      newObj[field] = record[i]
-    })
+    for (const field in fields) {
+      newObj[field] = record[fields[field]]
+    }
     output.push(newObj)
   })
   return output
