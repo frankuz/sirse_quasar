@@ -70,7 +70,7 @@ const localRunner = {
       },
       create: function () {
         // console.info('read',tbl,val)
-        const res = JSON.stringify({ data: { values: { negocio: 'Galletas', nombre: 'Sin nombre', categorias: [], uuid: 89 }, Id: Math.round(Math.random() * 10000) } })
+        const res = JSON.stringify({ data: { values: { negocio: 'Galletas', nombre: 'Sin nombre', categorias: '[]', uuid: 89 }, Id: Math.round(Math.random() * 10000) } })
         setTimeout(() => callback(res), 500)
       },
       createBatch: function (entity, data) {

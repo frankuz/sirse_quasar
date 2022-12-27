@@ -199,6 +199,7 @@ export const useAppStore = defineStore('app', {
         } else if (response.data) {
           const newRecord = response.data.values
           if (entity === 'iniciativas') {
+            newRecord.categorias = JSON.parse(newRecord.categorias)
             this.iniciativas.push(newRecord)
             this.iniciativaActiva = this.iniciativas[this.iniciativas.length - 1]
             this.iniciativaEditable = { ...newRecord }

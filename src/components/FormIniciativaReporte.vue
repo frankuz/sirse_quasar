@@ -192,6 +192,7 @@ function guardar () {
   if (cambiosBeneficiariosPrevios.value.length > 0) {
     const data = [...cambiosBeneficiariosPrevios.value]
     data.forEach(item => { item.cambios.userMail = app.userMail })
+    console.log(data)
     app.updateBatch('beneficiarios', data)
   }
   if (cambiosBeneficiariosNuevos.value.length > 0) {

@@ -306,6 +306,7 @@ function guardar () {
   const data = { ...cambios.value }
   data.userMail = app.userMail
   if (data.categorias) data.categorias = JSON.stringify(data.categorias)
+  else data.categorias = JSON.stringify([])
   if (iniciativa.uuid) app.update('iniciativas', iniciativa.Id, data)
   else app.create('iniciativas', data)
 }
