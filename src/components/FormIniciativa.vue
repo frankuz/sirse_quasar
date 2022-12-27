@@ -219,7 +219,7 @@
           :class="{'bg-yellow-3':!iniciativa.descripcionBeneficiarios}"
           label="DESCRIPCIÓN DE LOS BENEFICIARIOS"
         />
-        {{ cambios }}
+        <!-- {{ cambios }} -->
       </div>
       <!-- fin panel centro -->
       <!-- inicio panel derecha -->
@@ -227,13 +227,13 @@
         <q-card flat bordered>
           <q-card-section class="q-pa-none text-center">
             <div class="text-overline text-primary q-mt-md" style="line-height: 0.5rem;">INVERSIÓN</div>
-            <div class="text-h6">$ 1 020 000 000</div>
+            <div class="text-h6">$ {{iniciativa.inversion}}</div>
             <div v-if="iniciativa.categorias.includes('Voluntariado')">
               <div class="text-overline text-primary q-mt-md" style="line-height: 0.5rem;">VOLUNTARIOS</div>
-              <div class="text-h6">200</div>
+              <div class="text-h6">._.</div>
             </div>
             <div class="text-overline text-primary q-mt-md" style="line-height: 0.5rem;">BENEFICIARIOS</div>
-            <div class="text-h6">200</div>
+            <div class="text-h6">._.</div>
           </q-card-section>
           <q-separator />
           <q-card-actions align="center">
@@ -305,6 +305,7 @@ const cambiosSinGuardar = computed(() => {
 })
 function guardar () {
   const data = { ...cambios.value }
+  data.negocio = app.negocioActivo
   data.userMail = app.userMail
   if (!data.categorias) data.categorias = []
   data.categorias = JSON.stringify(data.categorias)

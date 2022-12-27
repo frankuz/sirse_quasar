@@ -62,9 +62,9 @@
       <div class="">
         <q-btn @click="agregarProyecto" label="Agregar proyecto" color="primary" flat class="q-mr-sm q-mt-md" />
       </div>
-      <pre>{{ cambiosIniciativa }}</pre>
+      <!-- <pre>{{ cambiosIniciativa }}</pre>
       <pre>{{ cambiosProyectosPrevios }}</pre>
-      <pre>{{ cambiosProyectosNuevos }}</pre>
+      <pre>{{ cambiosProyectosNuevos }}</pre> -->
     </q-card-section>
     <q-separator />
     <q-card-actions align="right">
@@ -132,7 +132,7 @@ function guardar () {
       item.userMail = app.userMail
       item.negocio = app.negocioActivo
       item.iniciativaId = app.iniciativaEditable.Id
-      item.iniciativaUuid = app.iniciativaEditable.Uuid
+      item.iniciativaUuid = app.iniciativaEditable.uuid
     })
     app.createBatch('proyectosdc', data)
   }

@@ -35,7 +35,7 @@
             <div class="col col-shrink">
               <div class="row no-wrap items-center">
                 <div class="col col-shrink"><q-icon name="diversity_3" color="blue-grey-6" size="2rem" /></div>
-                <div class="col-1 col-grow q-ml-sm">890</div>
+                <div class="col-1 col-grow q-ml-sm">._.</div>
                 <div class="col col-shrink"><q-icon name="paid" color="blue-grey-6" size="2rem" /></div>
                 <div class="col-1 col-grow q-ml-sm">{{ iniciativa.inversion }}</div>
               </div>

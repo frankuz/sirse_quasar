@@ -192,7 +192,6 @@ function guardar () {
   if (cambiosBeneficiariosPrevios.value.length > 0) {
     const data = [...cambiosBeneficiariosPrevios.value]
     data.forEach(item => { item.cambios.userMail = app.userMail })
-    console.log(data)
     app.updateBatch('beneficiarios', data)
   }
   if (cambiosBeneficiariosNuevos.value.length > 0) {
@@ -201,7 +200,7 @@ function guardar () {
       item.userMail = app.userMail
       item.negocio = app.negocioActivo
       item.iniciativaId = app.iniciativaEditable.Id
-      item.iniciativaUuid = app.iniciativaEditable.Uuid
+      item.iniciativaUuid = app.iniciativaEditable.uuid
     })
     app.createBatch('beneficiarios', data)
   }
