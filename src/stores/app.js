@@ -147,6 +147,7 @@ export const useAppStore = defineStore('app', {
     },
     seleccionarNegocio (negocio) {
       this.leftDrawerOpen = false
+      this.activePage = 'listaIniciativas'
       this.negocioActivo = negocio
       this.companias = this.tablaCompanias.filter(comp => comp[0] === negocio).map(comp => comp[1])
       this.showWaiting('Obteniendo datos del negocio ' + negocio)
@@ -154,7 +155,7 @@ export const useAppStore = defineStore('app', {
         this.hideWaiting()
         let response
         try { response = JSON.parse(res) } catch (e) { response = false }
-        if (response === false) {
+        if (!response) {
           this.showError({
             error: 'Ocurrió un error en la comunicación con el servidor',
             message: 'La respuesta del servidor no es un JSON válido: ' + res
@@ -186,7 +187,7 @@ export const useAppStore = defineStore('app', {
         this.hideWaiting()
         let response
         try { response = JSON.parse(res) } catch (e) { response = false }
-        if (response === false) {
+        if (!response) {
           this.showError({
             error: 'Ocurrió un error en la comunicación con el servidor',
             message: 'La respuesta del servidor no es un JSON válido: ' + res
@@ -218,7 +219,7 @@ export const useAppStore = defineStore('app', {
         this.hideWaiting()
         let response
         try { response = JSON.parse(res) } catch (e) { response = false }
-        if (response === false) {
+        if (!response) {
           this.showError({
             error: 'Ocurrió un error en la comunicación con el servidor',
             message: 'La respuesta del servidor no es un JSON válido: ' + res
@@ -262,7 +263,7 @@ export const useAppStore = defineStore('app', {
         this.hideWaiting()
         let response
         try { response = JSON.parse(res) } catch (e) { response = false }
-        if (response === false) {
+        if (!response) {
           this.showError({
             error: 'Ocurrió un error en la comunicación con el servidor',
             message: 'La respuesta del servidor no es un JSON válido: ' + res
@@ -292,7 +293,7 @@ export const useAppStore = defineStore('app', {
         this.hideWaiting()
         let response
         try { response = JSON.parse(res) } catch (e) { response = false }
-        if (response === false) {
+        if (!response) {
           this.showError({
             error: 'Ocurrió un error en la comunicación con el servidor',
             message: 'La respuesta del servidor no es un JSON válido: ' + res

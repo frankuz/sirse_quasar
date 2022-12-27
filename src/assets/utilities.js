@@ -30,6 +30,9 @@ const localRunner = {
         setTimeout(() => callback(res), 3000)
       },
       obtenerDatosDelNegocio: function (negocio) {
+        const fieldsArray = ['Id', 'Activo', 'negocio', 'uuid', 'nombre', 'compania', 'estado', 'fechaInicio', 'fechaFin', 'tipoInversion', 'grupoInteres', 'pilar', 'dimension', 'asuntoMaterial', 'ods', 'zona', 'categorias', 'responsable', 'descripcion', 'objetivo', 'descripcionBeneficiarios', 'inversion', 'logros', 'numEntidades', 'entidades', 'tipoVoluntariado', 'numVolPresidentesGerentes', 'numVolAltosDirectivos', 'numVolDireccionMedia', 'numVolAdministrativos', 'numVolOperativos', 'numVoluntarios', 'numVoluntarios', 'numHorasPresidentesGerentes', 'numHorasAltosDirectivos', 'numHorasDireccionMedia', 'numHorasAdministrativos', 'numHorasOperativos', 'numHoras', 'dineroDonado', 'tipoCapacidades', 'vulnerabilidad', 'listaCapacidades', 'userMail']
+        const fields = {}
+        fieldsArray.forEach((field, i) => (fields[field] = i))
         const res = JSON.stringify({
           data: {
             iniciativas: {
@@ -50,7 +53,7 @@ const localRunner = {
                 ['15', 'FALSE', 'Servicios', 'fasdf', 'iniciativa de ejemplo', 'Servicios (COL)', 'Borrador', '', '', '', 'Comunidad', 'Educación para la sociedad', '', '', '', '', '', 'Franklin Uribe', '', 'qué super objetivo', '', '1000000', '', '', '', 'Dinero', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
                 ['16', 'FALSE', 'Servicios', 'fasdf', 'iniciativa de ejemplo', 'Servicios (COL)', 'Borrador', '', '', '', 'Comunidad', 'Educación para la sociedad', '', '', '', '', '', 'Franklin Uribe', '', 'qué super objetivo', '', '1000000', '', '', '', 'Dinero', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
               ],
-              fields: ['Id', 'Activo', 'negocio', 'uuid', 'nombre', 'compania', 'estado', 'fechaInicio', 'fechaFin', 'tipoInversion', 'grupoInteres', 'pilar', 'dimension', 'asuntoMaterial', 'ods', 'zona', 'categorias', 'responsable', 'descripcion', 'objetivo', 'descripcionBeneficiarios', 'inversion', 'logros', 'numEntidades', 'entidades', 'tipoVoluntariado', 'numVolPresidentesGerentes', 'numVolAltosDirectivos', 'numVolDireccionMedia', 'numVolAdministrativos', 'numVolOperativos', 'numVoluntarios', 'numVoluntarios', 'numHorasPresidentesGerentes', 'numHorasAltosDirectivos', 'numHorasDireccionMedia', 'numHorasAdministrativos', 'numHorasOperativos', 'numHoras', 'dineroDonado', 'tipoCapacidades', 'vulnerabilidad', 'listaCapacidades', 'userMail']
+              fields
             },
             beneficiarios: { values: [], fields: [] },
             proyectosdc: { values: [], fields: [] },
