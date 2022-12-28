@@ -14,18 +14,3 @@ onMounted(() => {
   else app.leftDrawerOpen = true
 })
 </script>
-
-/*
-ToDo
-
-Ajustar ancho con nombres de asuntos largos
-Guardar iniciativa antes de ver reporte
-agregar soportes en FormIniciativa
-agregar número de instituciones
-al cerrar form preguntar si desea guardar los cambios
-
-Preguntas
-tendremos un consolidado de entregas a bancos de alimentos
-cuando tendremos cambios de moneda
-
-*/

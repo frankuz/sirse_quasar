@@ -67,13 +67,18 @@ const localRunner = {
         setTimeout(() => callback(res), 3)
       },
 
-      getPermissions: function () {
+      getPermissions: function (data) {
         const res = JSON.stringify({ data: { values: [{ permission: 'EDITOR', business: 'CAFÉS' }, { permission: 'EDITOR', business: 'CARNICOS' }], userEmail: 'user@email.com' } })
         setTimeout(() => callback(res), 1)
       },
-      create: function () {
+      create: function (entity, data) {
         // console.info('read',tbl,val)
-        const res = JSON.stringify({ data: { values: { negocio: 'Galletas', nombre: 'Sin nombre', categorias: '[]', uuid: 89 }, Id: Math.round(Math.random() * 10000) } })
+        data = JSON.parse(data)
+        const id = Math.round(Math.random() * 10000)
+        data.uuid = id
+        data.Id = id
+        const res = JSON.stringify({ data: { values: data, Id: id } })
+        // console.log(res)
         setTimeout(() => callback(res), 50)
       },
       createBatch: function (entity, data) {

@@ -4,35 +4,35 @@
       <!-- inicio panel izquierda -->
       <div class="col-3">
         <q-select
-          v-model="iniciativa.estado"
+          v-model="app.iniciativaEditable.estado"
           :options="['Borrador','Formulada','Activa','Cerrada']"
           filled
           label-color="primary"
-          :class="{'bg-yellow-3':!iniciativa.estado}"
+          :class="{'bg-yellow-3':!app.iniciativaEditable.estado}"
           label="ESTADO"
         />
         <q-select
-          v-model="iniciativa.compania"
+          v-model="app.iniciativaEditable.compania"
           filled
           :options="app.companias"
           label-color="primary"
-          :class="{'bg-yellow-3':!iniciativa.compania}"
+          :class="{'bg-yellow-3':!app.iniciativaEditable.compania}"
           label="COMPAÑÍA"
         />
         <q-input
-          v-model="iniciativa.fechaInicio"
+          v-model="app.iniciativaEditable.fechaInicio"
           :rules="['date']"
           filled
           hide-bottom-space
           mask="date"
           label-color="primary"
-          :class="{'bg-yellow-3':!iniciativa.fechaInicio}"
+          :class="{'bg-yellow-3':!app.iniciativaEditable.fechaInicio}"
           label="FECHA INICIO"
         >
           <template v-slot:append>
             <q-icon name="event" class="cursor-pointer">
               <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                <q-date v-model="iniciativa.fechaInicio" minimal>
+                <q-date v-model="app.iniciativaEditable.fechaInicio" minimal>
                   <div class="row items-center justify-end">
                     <q-btn v-close-popup label="Close" color="primary" flat />
                   </div>
@@ -42,19 +42,19 @@
           </template>
         </q-input>
         <q-input
-          v-model="iniciativa.fechaFin"
+          v-model="app.iniciativaEditable.fechaFin"
           :rules="['date']"
           filled
           hide-bottom-space
           mask="date"
           label-color="primary"
-          :class="{'bg-yellow-3':!iniciativa.fechaFin}"
+          :class="{'bg-yellow-3':!app.iniciativaEditable.fechaFin}"
           label="FECHA FIN"
         >
           <template v-slot:append>
             <q-icon name="event" class="cursor-pointer">
               <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                <q-date v-model="iniciativa.fechaFin" minimal>
+                <q-date v-model="app.iniciativaEditable.fechaFin" minimal>
                   <div class="row items-center justify-end">
                     <q-btn v-close-popup label="Close" color="primary" flat />
                   </div>
@@ -64,51 +64,51 @@
           </template>
         </q-input>
         <q-select
-          v-model="iniciativa.tipoInversion"
+          v-model="app.iniciativaEditable.tipoInversion"
           :options="['Actividades Caritativas','Iniciativas Comerciales','Inversión Comunitaria']"
           filled
           label-color="primary"
-          :class="{'bg-yellow-3':!iniciativa.tipoInversion}"
+          :class="{'bg-yellow-3':!app.iniciativaEditable.tipoInversion}"
           label="TIPO DE INVERSIÓN"
         />
         <q-select
-          v-model="iniciativa.grupoInteres"
+          v-model="app.iniciativaEditable.grupoInteres"
           :options="['Comunidad','Proveedores','Clientes']"
           filled
           label-color="primary"
-          :class="{'bg-yellow-3':!iniciativa.grupoInteres}"
+          :class="{'bg-yellow-3':!app.iniciativaEditable.grupoInteres}"
           label="GRUPO DE INTERÉS"
         />
         <q-select
           filled
-          v-model="iniciativa.pilar"
+          v-model="app.iniciativaEditable.pilar"
           :options="app.listaPilares"
           label-color="primary"
-          :class="{'bg-yellow-3':!iniciativa.pilar}"
+          :class="{'bg-yellow-3':!app.iniciativaEditable.pilar}"
           label="PILAR"
         />
         <q-select
           filled
-          v-model="iniciativa.asunto"
+          v-model="app.iniciativaEditable.asunto"
           :options="app.listaAsuntosMateriales"
           label-color="primary"
-          :class="{'bg-yellow-3':!iniciativa.asunto}"
+          :class="{'bg-yellow-3':!app.iniciativaEditable.asunto}"
           label="ASUNTO MATERIAL"
         />
         <!-- <q-select
           filled
-          v-model="iniciativa.ods"
+          v-model="app.iniciativaEditable.ods"
           :options="app.listaOds"
           label-color="primary"
-          :class="{'bg-yellow-3':!iniciativa.ods}"
+          :class="{'bg-yellow-3':!app.iniciativaEditable.ods}"
           label="ODS"
         /> -->
         <q-select
           filled
-          v-model="iniciativa.zona"
+          v-model="app.iniciativaEditable.zona"
           :options="['Urbana','Periurbana','Rural']"
           label-color="primary"
-          :class="{'bg-yellow-3':!iniciativa.zona}"
+          :class="{'bg-yellow-3':!app.iniciativaEditable.zona}"
           label="ZONA"
         />
         <!-- <q-input
@@ -124,23 +124,61 @@
         <q-input
           filled
           hide-bottom-space
-          v-model="iniciativa.nombre"
+          v-model="app.iniciativaEditable.nombre"
           label-color="primary"
-          :class="{'bg-yellow-3':!iniciativa.nombre}"
+          :class="{'bg-yellow-3':!app.iniciativaEditable.nombre}"
           label="NOMBRE DE LA INICIATIVA"
         />
         <q-input
           filled
           hide-bottom-space
-          v-model="iniciativa.responsable"
+          v-model="app.iniciativaEditable.responsable"
           label-color="primary"
-          :class="{'bg-yellow-3':!iniciativa.responsable}"
+          :class="{'bg-yellow-3':!app.iniciativaEditable.responsable}"
           label="RESPONSABLE"
         />
+        <div class="flex">
+          <q-input
+            filled
+            autogrow
+            v-model="app.iniciativaEditable.descripcion"
+            label-color="primary"
+            class="col-grow"
+            :class="{'bg-yellow-3':!app.iniciativaEditable.descripcion}"
+            label="DESCRIPCIÓN DE LA INICIATIVA"
+          />
+          <q-select
+            v-if="app.iniciativaEditable.categorias.includes('Voluntariado')"
+            filled
+            v-model="app.iniciativaEditable.tipoVoluntariado"
+            class="q-ml-sm"
+            :options="['Dinero','Tiempo']"
+            label-color="primary"
+            :class="{'bg-yellow-3':!app.iniciativaEditable.tipoVoluntariado}"
+            style="width: 200px;"
+            label="TIPO VOLUNTARIADO"
+          />
+        </div>
+        <!-- <q-input
+          filled
+          autogrow
+          v-model="app.iniciativaEditable.objetivo"
+          label-color="primary"
+          :class="{'bg-yellow-3':!app.iniciativaEditable.objetivo}"
+          label="OBJETIVO DE LA INICIATIVA"
+        />
+        <q-input
+          filled
+          autogrow
+          v-model="app.iniciativaEditable.descripcionBeneficiarios"
+          label-color="primary"
+          :class="{'bg-yellow-3':!app.iniciativaEditable.descripcionBeneficiarios}"
+          label="DESCRIPCIÓN DE LOS BENEFICIARIOS"
+        /> -->
         <div class="q-px-sm">
           <div class="text-overline text-primary">CATEGORÍAS ESPECIALES</div>
           <q-chip
-            v-for="c in iniciativa.categorias"
+            v-for="c in app.iniciativaEditable.categorias"
             :key="c"
             outline
             square
@@ -170,7 +208,7 @@
               </p>
             </q-card-section>
             <q-option-group
-              v-model="iniciativa.categorias"
+              v-model="app.iniciativaEditable.categorias"
               :options="app.listaCategorias"
               color="accent"
               type="checkbox"
@@ -181,44 +219,6 @@
             </q-card-actions>
           </q-card>
         </q-dialog>
-        <div class="flex">
-          <q-input
-            filled
-            autogrow
-            v-model="iniciativa.descripcion"
-            label-color="primary"
-            class="col-grow"
-            :class="{'bg-yellow-3':!iniciativa.descripcion}"
-            label="DESCRIPCIÓN DE LA INICIATIVA"
-          />
-          <q-select
-            v-if="iniciativa.categorias.includes('Voluntariado')"
-            filled
-            v-model="iniciativa.tipoVoluntariado"
-            class="q-ml-sm"
-            :options="['Dinero','Tiempo']"
-            label-color="primary"
-            :class="{'bg-yellow-3':!iniciativa.tipoVoluntariado}"
-            style="width: 200px;"
-            label="TIPO VOLUNTARIADO"
-          />
-        </div>
-        <q-input
-          filled
-          autogrow
-          v-model="iniciativa.objetivo"
-          label-color="primary"
-          :class="{'bg-yellow-3':!iniciativa.objetivo}"
-          label="OBJETIVO DE LA INICIATIVA"
-        />
-        <q-input
-          filled
-          autogrow
-          v-model="iniciativa.descripcionBeneficiarios"
-          label-color="primary"
-          :class="{'bg-yellow-3':!iniciativa.descripcionBeneficiarios}"
-          label="DESCRIPCIÓN DE LOS BENEFICIARIOS"
-        />
         <!-- {{ cambios }} -->
       </div>
       <!-- fin panel centro -->
@@ -227,8 +227,8 @@
         <q-card flat bordered>
           <q-card-section class="q-pa-none text-center">
             <div class="text-overline text-primary q-mt-md" style="line-height: 0.5rem;">INVERSIÓN</div>
-            <div class="text-h6">$ {{iniciativa.inversion}}</div>
-            <div v-if="iniciativa.categorias.includes('Voluntariado')">
+            <div class="text-h6">$ {{app.iniciativaEditable.inversion}}</div>
+            <div v-if="app.iniciativaEditable.categorias.includes('Voluntariado')">
               <div class="text-overline text-primary q-mt-md" style="line-height: 0.5rem;">VOLUNTARIOS</div>
               <div class="text-h6">._.</div>
             </div>
@@ -237,7 +237,7 @@
           </q-card-section>
           <q-separator />
           <q-card-actions align="center">
-            <q-btn color="accent" @click="(modal.reporte = true)">REPORTE</q-btn>
+            <q-btn color="accent" @click="mostrarReporte('reporte')">REPORTE</q-btn>
           </q-card-actions>
         </q-card>
         <q-card flat bordered class="q-my-md" style="display: none;">
@@ -247,17 +247,17 @@
           </q-card-section>
           <q-separator />
           <q-card-actions align="center">
-            <q-btn flat color="accent">REPORTE</q-btn>
+            <q-btn color="accent" @click="mostrarReporte('aliados')">REPORTE</q-btn>
           </q-card-actions>
         </q-card>
-        <q-card flat bordered class="q-my-md" v-if="iniciativa.categorias.includes('Desarrollo de capacidades')">
+        <q-card flat bordered class="q-my-md" v-if="app.iniciativaEditable.categorias.includes('Desarrollo de capacidades')">
           <q-card-section class="q-pa-xs text-center">
             <div class="text-overline text-primary q-mt-md" style="line-height: 0.5rem;">PROYECTOS D.C.</div>
             <div class="text-h6">0</div>
           </q-card-section>
           <q-separator />
           <q-card-actions align="center">
-            <q-btn color="accent" @click="(modal.proyectosDC=true)">REPORTE</q-btn>
+            <q-btn color="accent" @click="mostrarReporte('proyectosdc')">REPORTE</q-btn>
           </q-card-actions>
         </q-card>
       </div>
@@ -266,7 +266,7 @@
     <q-dialog persistant v-model="modal.reporte">
       <FormIniciativaReporte />
     </q-dialog>
-    <q-dialog persistant v-model="modal.proyectosDC">
+    <q-dialog persistant v-model="modal.proyectosdc">
       <FormIniciativaProyectosDC />
     </q-dialog>
     <div class="bg-grey-2 fixed-bottom">
@@ -280,7 +280,7 @@
 </template>
 
 <script setup>
-// import { useQuasar } from 'quasar'
+import { useQuasar } from 'quasar'
 import { ref, computed } from 'vue'
 import FormIniciativaReporte from 'src/components/FormIniciativaReporte.vue'
 import FormIniciativaProyectosDC from './FormIniciativaProyectosDC.vue'
@@ -288,17 +288,16 @@ import { objectsDiff } from 'assets/utilities'
 import { useAppStore } from 'stores/app'
 
 const app = useAppStore()
-// const $q = useQuasar()
+const $q = useQuasar()
 const modal = ref({
   seleccionarCategoria: false,
   reporte: false,
-  proyectosDC: false,
+  proyectosdc: false,
   aliados: false
 })
 const someModalVisible = computed(() => Object.values(modal.value).some(v => v))
-const iniciativa = app.iniciativaEditable
 const cambios = computed(() => {
-  return objectsDiff(iniciativa, app.iniciativaActiva)
+  return objectsDiff(app.iniciativaEditable, app.iniciativaActiva)
 })
 const cambiosSinGuardar = computed(() => {
   return JSON.stringify(cambios.value) !== '{}'
@@ -309,8 +308,21 @@ function guardar () {
   data.userMail = app.userMail
   if (!data.categorias) data.categorias = []
   data.categorias = JSON.stringify(data.categorias)
-  if (iniciativa.uuid) app.update('iniciativas', iniciativa.Id, data)
+  if (app.iniciativaEditable.uuid) app.update('iniciativas', app.iniciativaEditable.Id, data)
   else app.create('iniciativas', data)
+}
+function mostrarReporte (tipoReporte) {
+  if (!app.iniciativaEditable.uuid) {
+    $q.dialog({
+      title: 'Atención',
+      message: 'Debe diligenciar y guardar la información de la iniciativa antes de continuar'
+    })
+  } else if (cambiosSinGuardar.value) {
+    $q.dialog({
+      title: 'Atención',
+      message: 'Debe guardar los cambios de la iniciativa antes de continuar'
+    })
+  } else modal.value[tipoReporte] = true
 }
 // const iniciativa = ref({
 //   id: 'blabla',

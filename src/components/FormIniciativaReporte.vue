@@ -10,9 +10,9 @@
           <q-input
             filled
             v-model.number="iniciativa.inversion"
-            label="INVERSIÓN (moneda local) *"
+            label="INVERSIÓN DE LA COMPAÑÍA (moneda local) *"
             label-color="primary"
-            :class="{'bg-yellow-3':!iniciativa.inversion && tipoVoluntariado != 'Dinero'}"
+            :class="{'bg-yellow-3':!iniciativa.inversion}"
             mask="### ### ### ###"
             unmasked-value
             reverse-fill-mask
@@ -61,7 +61,7 @@
             filled
             autogrow
             v-model.number="iniciativa.dineroDonado"
-            label="APORTE EN DINERO (moneda local)"
+            label="APORTE DE COLABORADORES (moneda local)"
             label-color="primary"
             mask="### ### ### ###"
             unmasked-value
