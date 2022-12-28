@@ -95,6 +95,9 @@ function mostrarIniciativa (iniciativa) {
 function crearIniciativa () {
   app.iniciativaActiva = { negocio: app.negocioActivo, categorias: [] }
   app.iniciativaEditable = { ...app.iniciativaActiva }
+  app.beneficiariosActivos = []
+  app.proyectosdcActivos = []
+  app.aliadosActivos = []
   app.activePage = 'formIniciativa'
 }
 </script>

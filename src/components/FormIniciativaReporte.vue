@@ -124,7 +124,8 @@
       </div>
       <!-- <pre>{{ cambiosIniciativa }}</pre>
       <pre>{{ cambiosBeneficiariosPrevios }}</pre>
-      <pre>{{ cambiosBeneficiariosNuevos }}</pre> -->
+      <pre>{{ cambiosBeneficiariosNuevos }}</pre>
+      <pre>{{app.iniciativaEditable}}</pre> -->
     </q-card-section>
     <q-separator />
     <q-card-actions align="right">
