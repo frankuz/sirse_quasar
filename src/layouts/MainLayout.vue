@@ -24,7 +24,7 @@
           R.S.E. <span class="q-ml-lg">{{app.negocioActivo}}</span>
         </q-toolbar-title>
 
-        <div>{{app.userMail}}</div>
+        <div @dblclick="loggerStoreIsVisible = true">{{app.userMail}}</div>
       </q-toolbar>
     </q-header>
 
@@ -54,18 +54,39 @@
       <DialogWaiting />
       <DialogError />
     </q-page-container>
+    <q-dialog maximized v-model="loggerStoreIsVisible">
+      <q-card class="bg-primary text-white">
+        <q-bar>
+          <q-space />
+          <q-btn dense flat icon="close" v-close-popup>
+            <q-tooltip class="bg-white text-primary">Close</q-tooltip>
+          </q-btn>
+        </q-bar>
+
+        <q-card-section>
+          <LoggerStore />
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </q-layout>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import DialogError from 'src/components/DialogError.vue'
 import DialogWaiting from 'src/components/DialogWaiting.vue'
 import FormIniciativa from 'src/components/FormIniciativa.vue'
 import ListaIniciativas from 'src/components/ListaIniciativas.vue'
+import LoggerStore from 'src/components/LoggerStore.vue'
 import { useAppStore } from 'stores/app'
 
 // const $q = useQuasar()
 const app = useAppStore()
+
+const loggerStoreIsVisible = ref(false)
 
 function toggleLeftDrawer () {
   app.leftDrawerOpen = !app.leftDrawerOpen
