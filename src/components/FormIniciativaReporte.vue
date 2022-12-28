@@ -12,11 +12,10 @@
             v-model.number="iniciativa.inversion"
             label="INVERSIÓN DE LA COMPAÑÍA (moneda local) *"
             label-color="primary"
-            :class="{'bg-yellow-3':!iniciativa.inversion}"
+            :class="{'bg-yellow-3':!iniciativa.inversion && tipoVoluntariado != 'Dinero'}"
             mask="### ### ### ###"
             unmasked-value
             reverse-fill-mask
-            :disable="tipoVoluntariado == 'Dinero'"
           />
         </div>
         <div class="col-4 q-pl-md">
