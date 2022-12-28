@@ -182,6 +182,9 @@ const cambiosSinGuardar = computed(() => {
           cambiosBeneficiariosPrevios.value.length > 0 ||
           cambiosBeneficiariosNuevos.value.length > 0
 })
+// function sumarBeneficiarios(){
+
+// }
 function guardar () {
   if (objectNotEmpty(cambiosIniciativa.value)) {
     const data = { ...cambiosIniciativa.value }
