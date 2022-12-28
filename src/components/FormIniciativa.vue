@@ -89,7 +89,7 @@
         />
         <q-select
           filled
-          v-model="app.iniciativaEditable.Material"
+          v-model="app.iniciativaEditable.asuntoMaterial"
           :options="app.listaAsuntosMateriales"
           label-color="primary"
           :class="{'bg-yellow-3':!app.iniciativaEditable.asuntoMaterial}"
