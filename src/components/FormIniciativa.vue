@@ -230,7 +230,7 @@
             <div class="text-h6">$ {{app.iniciativaEditable.inversion}}</div>
             <div v-if="app.iniciativaEditable.categorias.includes('Voluntariado')">
               <div class="text-overline text-primary q-mt-md" style="line-height: 0.5rem;">VOLUNTARIOS</div>
-              <div class="text-h6">{{ app.numBenefPorInic[app.iniciativaEditable.Id] }}</div>
+              <div class="text-h6">{{ app.totalesPorInic[app.iniciativaEditable.Id].voluntarios }}</div>
             </div>
             <div class="text-overline text-primary q-mt-md" style="line-height: 0.5rem;">BENEFICIARIOS</div>
             <div class="text-h6">{{ app.numBenefPorInic[app.iniciativaEditable.Id] }}</div>
@@ -243,7 +243,7 @@
         <q-card flat bordered class="q-my-md" style="display: none;">
           <q-card-section class="q-pa-xs text-center">
             <div class="text-overline text-primary q-mt-md" style="line-height: 0.5rem;">ALIADOS</div>
-            <div class="text-h6">0</div>
+            <div class="text-h6">{{ app.totalesPorInic[app.iniciativaEditable.Id].aliados }}</div>
           </q-card-section>
           <q-separator />
           <q-card-actions align="center">
@@ -253,7 +253,7 @@
         <q-card flat bordered class="q-my-md" v-if="app.iniciativaEditable.categorias.includes('Desarrollo de capacidades')">
           <q-card-section class="q-pa-xs text-center">
             <div class="text-overline text-primary q-mt-md" style="line-height: 0.5rem;">PROYECTOS D.C.</div>
-            <div class="text-h6">0</div>
+            <div class="text-h6">{{ app.totalesPorInic[app.iniciativaEditable.Id].proyectosdc }}</div>
           </q-card-section>
           <q-separator />
           <q-card-actions align="center">

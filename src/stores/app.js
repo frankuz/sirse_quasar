@@ -133,6 +133,26 @@ export const useAppStore = defineStore('app', {
         totales[iniciativa.Id] = totalInic
       })
       return totales
+    },
+    totalesPorInic: (state) => {
+      const totales = {}
+      state.iniciativas.forEach(iniciativa => {
+        let voluntarios = 0
+        const keys = ['numVolPresidentesGerentes', 'numVolAltosDirectivos', 'numVolDireccionMedia', 'numVolAdministrativos', 'numVolOperativos']
+        if (iniciativa.tipoVoluntariado === 'Dinero') voluntarios = iniciativa.numVoluntarios
+        else if (iniciativa.tipoVoluntariado === 'Tiempo') {
+          keys.forEach(key => {
+            if (iniciativa[key]) voluntarios += parseInt(iniciativa[key])
+          })
+        } else voluntarios = 0
+
+        totales[iniciativa.Id] = {
+          voluntarios,
+          proyectosdc: state.proyectosdc.filter(i => i.iniciativaId === iniciativa.Id && i.nombre).length,
+          aliados: state.aliados.filter(i => i.iniciativaId === iniciativa.Id && i.nombre).length
+        }
+      })
+      return totales
     }
   },
   actions: {
