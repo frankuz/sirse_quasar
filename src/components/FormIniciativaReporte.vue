@@ -122,10 +122,11 @@
       <div class="">
         <q-btn @click="agregarRegion" label="Agregar fila" color="primary" flat class="q-mr-sm q-mt-md" />
       </div>
-      <!-- <pre>{{ cambiosIniciativa }}</pre>
-      <pre>{{ cambiosBeneficiariosPrevios }}</pre>
-      <pre>{{ cambiosBeneficiariosNuevos }}</pre>
-      <pre>{{app.iniciativaEditable}}</pre> -->
+      <pre>beneficiariosActivos {{ app.beneficiariosActivos }}</pre>
+      <pre>cambiosIniciativa {{ cambiosIniciativa }}</pre>
+      <pre>cambiosBeneficiariosPrevios {{ cambiosBeneficiariosPrevios }}</pre>
+      <pre>cambiosBeneficiariosNuevos {{ cambiosBeneficiariosNuevos }}</pre>
+      <pre>iniciativaEditable {{app.iniciativaEditable}}</pre>
     </q-card-section>
     <q-separator />
     <q-card-actions align="right">
@@ -170,12 +171,20 @@ const cambiosIniciativa = computed(() => {
 })
 const cambiosBeneficiariosPrevios = computed(() => {
   const cambios = app.beneficiariosActivos.filter(reg => !reg.esNuevo)
-    .map(reg => ({ id: reg.editable.Id, cambios: objectsDiff(reg.editable, reg.actual) }))
+    // .map(reg => ({ id: reg.editable.Id, editable: reg.editable, cambios: objectsDiff(reg.editable, reg.actual) }))
+    .map(reg => {
+      reg.editable.total = sumarBeneficiariosReg(reg.editable)
+      return { id: reg.editable.Id, editable: reg.editable, cambios: objectsDiff(reg.editable, reg.actual) }
+    })
   return cambios.filter(cambio => objectNotEmpty(cambio.cambios))
 })
 const cambiosBeneficiariosNuevos = computed(() => {
   const cambios = app.beneficiariosActivos.filter(reg => reg.esNuevo)
-    .map(reg => objectsDiff(reg.editable, { ...objBeneficiarios }))
+    // .map(reg => objectsDiff(reg.editable, { ...objBeneficiarios }))
+    .map(reg => {
+      reg.editable.total = sumarBeneficiariosReg(reg.editable)
+      return objectsDiff(reg.editable, { ...objBeneficiarios })
+    })
   return cambios.filter(cambio => objectNotEmpty(cambio))
 })
 const cambiosSinGuardar = computed(() => {
@@ -183,9 +192,14 @@ const cambiosSinGuardar = computed(() => {
           cambiosBeneficiariosPrevios.value.length > 0 ||
           cambiosBeneficiariosNuevos.value.length > 0
 })
-// function sumarBeneficiarios(){
-
-// }
+function sumarBeneficiariosReg (reg) {
+  let total = 0
+  const keys = ['mujeresNinas', 'mujeresJovenes', 'mujeresAdultas', 'mujeresMayores', 'hombresNinos', 'hombresJovenes', 'hombresAdultos', 'hombresMayores']
+  keys.forEach(key => {
+    if (reg[key]) total += parseInt(reg[key])
+  })
+  return total
+}
 function guardar () {
   if (objectNotEmpty(cambiosIniciativa.value)) {
     const data = { ...cambiosIniciativa.value }
@@ -194,7 +208,9 @@ function guardar () {
   }
   if (cambiosBeneficiariosPrevios.value.length > 0) {
     const data = [...cambiosBeneficiariosPrevios.value]
-    data.forEach(item => { item.cambios.userMail = app.userMail })
+    data.forEach(item => {
+      item.cambios.userMail = app.userMail
+    })
     app.updateBatch('beneficiarios', data)
   }
   if (cambiosBeneficiariosNuevos.value.length > 0) {

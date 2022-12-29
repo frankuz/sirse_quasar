@@ -230,10 +230,10 @@
             <div class="text-h6">$ {{app.iniciativaEditable.inversion}}</div>
             <div v-if="app.iniciativaEditable.categorias.includes('Voluntariado')">
               <div class="text-overline text-primary q-mt-md" style="line-height: 0.5rem;">VOLUNTARIOS</div>
-              <div class="text-h6">._.</div>
+              <div class="text-h6">{{ app.numBenefPorInic[app.iniciativaEditable.Id] }}</div>
             </div>
             <div class="text-overline text-primary q-mt-md" style="line-height: 0.5rem;">BENEFICIARIOS</div>
-            <div class="text-h6">._.</div>
+            <div class="text-h6">{{ app.numBenefPorInic[app.iniciativaEditable.Id] }}</div>
           </q-card-section>
           <q-separator />
           <q-card-actions align="center">

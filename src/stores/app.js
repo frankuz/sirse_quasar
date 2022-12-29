@@ -122,7 +122,18 @@ export const useAppStore = defineStore('app', {
   }),
   getters: {
     waitingMsgIsVisible: (state) => !!state.waitingMessage,
-    errorMsgIsVisible: (state) => !!state.error.error
+    errorMsgIsVisible: (state) => !!state.error.error,
+    numBenefPorInic: (state) => {
+      const totales = {}
+      state.iniciativas.forEach(iniciativa => {
+        const beneficiarios = state.beneficiarios.filter(b => b.iniciativaId === iniciativa.Id)
+        const totalInic = beneficiarios.reduce((suma, elem) => {
+          if (elem.total) { return suma + elem.total } else { return suma + 0 }
+        }, 0)
+        totales[iniciativa.Id] = totalInic
+      })
+      return totales
+    }
   },
   actions: {
     showError (options) {
