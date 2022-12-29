@@ -122,11 +122,11 @@
       <div class="">
         <q-btn @click="agregarRegion" label="Agregar fila" color="primary" flat class="q-mr-sm q-mt-md" />
       </div>
-      <pre>beneficiariosActivos {{ app.beneficiariosActivos }}</pre>
+      <!-- <pre>beneficiariosActivos {{ app.beneficiariosActivos }}</pre>
       <pre>cambiosIniciativa {{ cambiosIniciativa }}</pre>
       <pre>cambiosBeneficiariosPrevios {{ cambiosBeneficiariosPrevios }}</pre>
       <pre>cambiosBeneficiariosNuevos {{ cambiosBeneficiariosNuevos }}</pre>
-      <pre>iniciativaEditable {{app.iniciativaEditable}}</pre>
+      <pre>iniciativaEditable {{app.iniciativaEditable}}</pre> -->
     </q-card-section>
     <q-separator />
     <q-card-actions align="right">
