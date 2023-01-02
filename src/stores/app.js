@@ -212,6 +212,14 @@ export const useAppStore = defineStore('app', {
         }
       }).obtenerDatosDelNegocio(negocio)
     },
+    crearIniciativa () {
+      this.iniciativaActiva = { negocio: this.negocioActivo, categorias: [] }
+      this.iniciativaEditable = { ...this.iniciativaActiva }
+      this.beneficiariosActivos = []
+      this.proyectosdcActivos = []
+      this.aliadosActivos = []
+      this.activePage = 'formIniciativa'
+    },
     create (entity, data) {
       this.showWaiting('Guardando datos de ' + entity.toUpperCase())
       runner.withSuccessHandler(res => {

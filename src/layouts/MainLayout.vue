@@ -21,9 +21,13 @@
               <path d="m96.568 143.05c-0.51276 0.0395-1.0295 0.0276-1.5343-0.0236-0.04339 0-0.08283-4e-3 -0.12227-8e-3 -8.1726-0.87564-15.904-3.4986-22.988-7.7861-26.297-15.963-34.706-50.341-18.743-76.642 9.3914-15.474 25.796-25.457 43.877-26.711l0.71787-0.04333c0.57193-0.06307 1.1636-0.07893 1.7276-0.03547 1.4318 0.1104 2.7768 0.54827 4.0193 1.3016 2.0787 1.2582 3.542 3.258 4.1218 5.6207 0.57587 2.3627 0.2051 4.8081-1.065 6.8947-1.5343 2.5244-4.2244 4.1573-7.1944 4.3624l-0.25638 0.012c-0.33527 0.01573-0.67448 0.03547-1.0097 0.0592-12.188 0.84408-23.248 7.581-29.586 18.033-10.76 17.726-5.0921 40.907 12.638 51.671 4.7845 2.907 10.015 4.6701 15.537 5.2538 1.3726 0.1104 2.7098 0.54825 3.9285 1.2898 4.2678 2.5875 5.6325 8.1569 3.045 12.417-1.5264 2.5126-4.181 4.1336-7.1116 4.3348" fill="#2c698a" stroke="#1f485e" stroke-width="2.5"/>
             </svg>
           </q-avatar>
-          R.S.E. <span class="q-ml-lg">{{app.negocioActivo}}</span>
+          R.S.E.
+          <span class="q-ml-lg">{{app.negocioActivo}}</span>
+          <span v-if="app.activePage==='listaIniciativas'" class="text-subtitle1"> - Lista de iniciativas</span>
         </q-toolbar-title>
-
+        <div v-if="app.activePage==='listaIniciativas'">
+          <q-btn label="AGREGAR INICIATIVA" icon="add" color="accent" class="on-left" @click="app.crearIniciativa" />
+        </div>
         <div @dblclick="loggerStoreIsVisible = true">{{app.userMail}}</div>
       </q-toolbar>
     </q-header>

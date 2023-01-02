@@ -3,10 +3,6 @@
     Selecciona un negocio en el menú
   </div>
   <div v-else class="row q-pa-md q-col-gutter-md" style="background-color: #CEE3EE">
-    <div class="col-12 flex justify-between">
-      <div class="text-h6">Lista de iniciativas</div>
-      <q-btn label="AGREGAR INICIATIVA" color="accent" @click="crearIniciativa" />
-    </div>
     <div
       class="col-3"
       v-for="iniciativa in app.iniciativas"
@@ -90,14 +86,6 @@ function mostrarIniciativa (iniciativa) {
     editable: { ...region },
     esNuevo: false
   }))
-  app.activePage = 'formIniciativa'
-}
-function crearIniciativa () {
-  app.iniciativaActiva = { negocio: app.negocioActivo, categorias: [] }
-  app.iniciativaEditable = { ...app.iniciativaActiva }
-  app.beneficiariosActivos = []
-  app.proyectosdcActivos = []
-  app.aliadosActivos = []
   app.activePage = 'formIniciativa'
 }
 </script>
