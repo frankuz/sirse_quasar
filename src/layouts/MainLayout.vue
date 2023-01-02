@@ -23,9 +23,9 @@
           </q-avatar>
           R.S.E.
           <span class="q-ml-lg">{{app.negocioActivo}}</span>
-          <span v-if="app.activePage==='listaIniciativas'" class="text-subtitle1"> - Lista de iniciativas</span>
+          <span v-if="app.activePage==='listaIniciativas' && app.negocioActivo" class="text-subtitle1"> - Lista de iniciativas</span>
         </q-toolbar-title>
-        <div v-if="app.activePage==='listaIniciativas'">
+        <div v-if="app.activePage==='listaIniciativas' && app.negocioActivo">
           <q-btn label="AGREGAR INICIATIVA" icon="add" color="accent" class="on-left" @click="app.crearIniciativa" />
         </div>
         <div @dblclick="loggerStoreIsVisible = true">{{app.userMail}}</div>

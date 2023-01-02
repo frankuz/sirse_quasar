@@ -118,11 +118,29 @@ export const useAppStore = defineStore('app', {
     proyectosdc: [],
     proyectosdcActivos: [],
     aliados: [],
-    aliadosActivos: []
+    aliadosActivos: [],
+    filtrosIniciativas: {
+      compania: '',
+      estado: '',
+      grupoInteres: '',
+      pilar: '',
+      categorias: ''
+    }
   }),
   getters: {
     waitingMsgIsVisible: (state) => !!state.waitingMessage,
     errorMsgIsVisible: (state) => !!state.error.error,
+    iniciativasFiltradas: (state) => {
+      const filt = state.filtrosIniciativas
+      return state.iniciativas.filter(iniciativa => {
+        for (const camp in filt) {
+          if (camp === 'categorias') {
+            if (filt[camp] && !iniciativa.categorias.includes(filt[camp])) return false
+          } else if (filt[camp] && iniciativa[camp] !== filt[camp]) return false
+        }
+        return true
+      })
+    },
     numBenefPorInic: (state) => {
       const totales = {}
       state.iniciativas.forEach(iniciativa => {
@@ -176,6 +194,11 @@ export const useAppStore = defineStore('app', {
     hideWaiting () {
       this.waitingMessage = ''
     },
+    resetFiltrosIniciativas () {
+      for (const field in this.filtrosIniciativas) {
+        this.filtrosIniciativas[field] = ''
+      }
+    },
     seleccionarNegocio (negocio) {
       this.leftDrawerOpen = false
       this.activePage = 'listaIniciativas'
@@ -203,6 +226,7 @@ export const useAppStore = defineStore('app', {
           this.beneficiarios = arrayToObjects(response.data.beneficiarios)
           this.proyectosdc = arrayToObjects(response.data.proyectosdc)
           this.aliados = arrayToObjects(response.data.aliados)
+          this.resetFiltrosIniciativas()
           this.hideWaiting()
         } else {
           this.showError({
