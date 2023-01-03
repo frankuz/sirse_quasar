@@ -39,7 +39,6 @@ export const useAppStore = defineStore('app', {
     negocios: datosFromServer.negocios,
     tablaCompanias: datosFromServer.tablaCompanias,
     negocioActivo: '',
-    companias: [],
     leftDrawerOpen: false,
     activePage: 'listaIniciativas',
     listaPilares: [
@@ -130,6 +129,10 @@ export const useAppStore = defineStore('app', {
   getters: {
     waitingMsgIsVisible: (state) => !!state.waitingMessage,
     errorMsgIsVisible: (state) => !!state.error.error,
+    companias: (state) => {
+      if (!state.negocioActivo) return []
+      return state.tablaCompanias.filter(row => row[0] === state.negocioActivo).map(row => row[1])
+    },
     iniciativasFiltradas: (state) => {
       const filt = state.filtrosIniciativas
       return state.iniciativas.filter(iniciativa => {
@@ -205,7 +208,6 @@ export const useAppStore = defineStore('app', {
       this.leftDrawerOpen = false
       this.activePage = 'listaIniciativas'
       this.negocioActivo = negocio
-      this.companias = this.tablaCompanias.filter(comp => comp[0] === negocio).map(comp => comp[1])
       this.showWaiting('Obteniendo datos del negocio ' + negocio)
       runner.withSuccessHandler(res => {
         this.hideWaiting()
@@ -228,7 +230,7 @@ export const useAppStore = defineStore('app', {
           this.beneficiarios = arrayToObjects(response.data.beneficiarios)
           this.proyectosdc = arrayToObjects(response.data.proyectosdc)
           this.aliados = arrayToObjects(response.data.aliados)
-          this.resetFiltrosIniciativas()
+          this.filtrosIniciativas.compania = ''
           this.hideWaiting()
         } else {
           this.showError({

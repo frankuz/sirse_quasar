@@ -94,7 +94,6 @@ import DialogFilterIniciativas from 'src/components/DialogFilterIniciativas.vue'
 
 // const $q = useQuasar()
 const app = useAppStore()
-
 const loggerStoreIsVisible = ref(false)
 
 function toggleLeftDrawer () {

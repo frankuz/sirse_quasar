@@ -30,15 +30,16 @@
 </template>
 
 <script setup>
+import { ref, toRef } from 'vue'
 import { useAppStore } from 'stores/app'
 const app = useAppStore()
-const criterios = [
-  { class: 'col-2', titulo: 'COMPAÑÍA', campo: 'compania', opciones: app.companias },
+const criterios = ref([
+  { class: 'col-2', titulo: 'COMPAÑÍA', campo: 'compania', opciones: toRef(app, 'companias') },
   { class: 'col-2', titulo: 'ESTADO', campo: 'estado', opciones: ['Borrador', 'Formulada', 'Activa', 'Cerrada'] },
   { class: 'col-2', titulo: 'GRUPO&nbsp;DE&nbsp;INTERÉS', campo: 'grupoInteres', opciones: ['Comunidad', 'Proveedores', 'Clientes'] },
   { class: 'col', titulo: 'PILAR', campo: 'pilar', opciones: app.listaPilares },
   { class: 'col', titulo: 'CATEGORÍA ESPECIAL', campo: 'categorias', opciones: app.listaCategorias.map(e => e.value) }
-]
+])
 function criterioEstaActivo (campo, valor) {
   return app.filtrosIniciativas[campo] === valor
 }
