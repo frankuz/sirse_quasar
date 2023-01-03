@@ -176,8 +176,11 @@
           label="DESCRIPCIÓN DE LOS BENEFICIARIOS"
         /> -->
         <div class="q-px-sm">
-          <div class="text-overline text-primary">CATEGORÍAS ESPECIALES{{ app.iniciativaEditable.Id }}</div>
-          <q-chip
+          <div class="row items-center">
+            <span class="text-overline text-primary">CATEGORÍAS ESPECIALES</span>
+            <q-btn round flat icon="help" color="grey-7" @click="(modal.seleccionarCategoria = true)"/>
+          </div>
+          <!-- <q-chip
             v-for="c in app.iniciativaEditable.categorias"
             :key="c"
             outline
@@ -186,10 +189,25 @@
             text-color="white"
             class="q-ma-xs"
             :label="c"
-          />
-          <q-btn round size="sm" color="accent" icon="edit_note" @click="(modal.seleccionarCategoria = true)">
+          /> -->
+          <!-- <q-btn round size="sm" color="accent" icon="edit_note" @click="(modal.seleccionarCategoria = true)">
             <q-tooltip>Seleccionar categorías</q-tooltip>
-          </q-btn>
+          </q-btn> -->
+          <q-option-group
+              v-model="app.iniciativaEditable.categorias"
+              :options="app.listaCategorias"
+              color="accent"
+              type="checkbox"
+              class="text-grey-7"
+          >
+            <template v-slot:label="opt">
+              <div class="row items-center">
+                <span :class="{'text-primary text-weight-bold':app.iniciativaEditable.categorias.includes(opt.value)}">
+                  {{ opt.label }}
+                </span>
+              </div>
+            </template>
+          </q-option-group>
         </div>
         <q-dialog v-model="modal.seleccionarCategoria" persistent>
           <q-card>
@@ -207,12 +225,12 @@
                 Es posible que algunas iniciativas se clasifiquen en varias categorías.
               </p>
             </q-card-section>
-            <q-option-group
+            <!-- <q-option-group
               v-model="app.iniciativaEditable.categorias"
               :options="app.listaCategorias"
               color="accent"
               type="checkbox"
-            />
+            /> -->
             <q-separator />
             <q-card-actions align="right">
               <q-btn color="accent" flat @click="(modal.seleccionarCategoria = false)">cerrar</q-btn>

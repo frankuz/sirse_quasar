@@ -46,7 +46,6 @@ export const useAppStore = defineStore('app', {
       'Cadena de valor sostenible',
       'Comunidades saludables',
       'Educación para la sociedad',
-      'Voluntariado',
       'Otros proyectos sociales'
     ],
     listaAsuntosMateriales: [
@@ -125,7 +124,8 @@ export const useAppStore = defineStore('app', {
       grupoInteres: '',
       pilar: '',
       categorias: ''
-    }
+    },
+    dialogFiltrosIniciativasIsVisible: false
   }),
   getters: {
     waitingMsgIsVisible: (state) => !!state.waitingMessage,
@@ -134,9 +134,10 @@ export const useAppStore = defineStore('app', {
       const filt = state.filtrosIniciativas
       return state.iniciativas.filter(iniciativa => {
         for (const camp in filt) {
+          if (!filt[camp]) continue
           if (camp === 'categorias') {
-            if (filt[camp] && !iniciativa.categorias.includes(filt[camp])) return false
-          } else if (filt[camp] && iniciativa[camp] !== filt[camp]) return false
+            if (!iniciativa.categorias.includes(filt[camp])) return false
+          } else if (iniciativa[camp] !== filt[camp]) return false
         }
         return true
       })
@@ -171,7 +172,8 @@ export const useAppStore = defineStore('app', {
         }
       })
       return totales
-    }
+    },
+    numFiltrosIniciativas: (state) => Object.values(state.filtrosIniciativas).filter(v => v).length
   },
   actions: {
     showError (options) {

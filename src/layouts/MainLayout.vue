@@ -26,6 +26,9 @@
           <span v-if="app.activePage==='listaIniciativas' && app.negocioActivo" class="text-subtitle1"> - Lista de iniciativas</span>
         </q-toolbar-title>
         <div v-if="app.activePage==='listaIniciativas' && app.negocioActivo">
+          <q-btn label="FILTROS" icon="filter_alt" color="accent" class="on-left" @click="app.dialogFiltrosIniciativasIsVisible = true">
+            <q-badge floating rounded color="negative" v-show="app.numFiltrosIniciativas">{{app.numFiltrosIniciativas}}</q-badge>
+          </q-btn>
           <q-btn label="AGREGAR INICIATIVA" icon="add" color="accent" class="on-left" @click="app.crearIniciativa" />
         </div>
         <div @dblclick="loggerStoreIsVisible = true">{{app.userMail}}</div>
@@ -58,6 +61,7 @@
       <DialogWaiting />
       <DialogError />
     </q-page-container>
+    <DialogFilterIniciativas />
     <q-dialog maximized v-model="loggerStoreIsVisible">
       <q-card class="bg-primary text-white">
         <q-bar>
@@ -86,6 +90,7 @@ import FormIniciativa from 'src/components/FormIniciativa.vue'
 import ListaIniciativas from 'src/components/ListaIniciativas.vue'
 import LoggerStore from 'src/components/LoggerStore.vue'
 import { useAppStore } from 'stores/app'
+import DialogFilterIniciativas from 'src/components/DialogFilterIniciativas.vue'
 
 // const $q = useQuasar()
 const app = useAppStore()

@@ -2,10 +2,13 @@
   <div v-if="!app.negocioActivo" class="fixed-center">
     Selecciona un negocio en el menú
   </div>
+  <div v-else-if="app.numFiltrosIniciativas && !app.iniciativasFiltradas.length" class="fixed-center">
+    No hay iniciativas que coincidan con los filtros activados
+  </div>
   <div v-else class="row q-pa-md q-col-gutter-md" style="background-color: #CEE3EE">
     <div
       class="col-3"
-      v-for="iniciativa in app.iniciativas"
+      v-for="iniciativa in app.iniciativasFiltradas"
       :key="iniciativa.Id"
     >
       <q-card flat bordered @click="mostrarIniciativa(iniciativa)" style="cursor: pointer;height: 100%;">
