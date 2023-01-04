@@ -10,7 +10,11 @@
           label-color="primary"
           :class="{'bg-yellow-3':!app.iniciativaEditable.estado}"
           label="ESTADO"
-        />
+        >
+          <template v-slot:after>
+            <q-btn round dense flat icon="help" @click="ayudaEstado"/>
+          </template>
+        </q-select>
         <q-select
           v-model="app.iniciativaEditable.compania"
           filled
@@ -341,6 +345,25 @@ function mostrarReporte (tipoReporte) {
       message: 'Debe guardar los cambios de la iniciativa antes de continuar'
     })
   } else modal.value[tipoReporte] = true
+}
+function ayudaEstado () {
+  $q.dialog({
+    title: 'Estados de las iniciativas',
+    message: `
+      <span style="background:#B0BEC5;color:white;padding:0 7px;font-size:0.9em;border-radius:5px;">BORRADOR</span>
+      Iniciativas con información preliminar. 
+      La información de las iniciativas en estado BORRADOR no se tienen en cuenta para el reporte.<br><br>
+      <span style="background:#FF9800;color:white;padding:0 7px;font-size:0.9em;border-radius:5px;">FORMULADA</span>
+      Iniciativas que están planificadas y programadas pero que todavía no se han empezado a implementar.<br><br>
+      <span style="background:#43B02A;color:white;padding:0 7px;font-size:0.9em;border-radius:5px;">ACTIVA</span>
+      Iniciativas que se están desarrollando y que probablemente continúen en los años siguientes.<br><br>
+      <span style="background:#2E6B89;color:white;padding:0 7px;font-size:0.9em;border-radius:5px;">CERRADA</span>
+      Iniciativas que ya se desarrollaron por completo y ya no se realizarán más acciones en el futuro.<br><br>
+    `,
+    html: true,
+    ok: 'CERRAR',
+    style: 'width: 800px;'
+  })
 }
 // const iniciativa = ref({
 //   id: 'blabla',
