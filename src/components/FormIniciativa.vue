@@ -163,22 +163,6 @@
             label="TIPO VOLUNTARIADO"
           />
         </div>
-        <!-- <q-input
-          filled
-          autogrow
-          v-model="app.iniciativaEditable.objetivo"
-          label-color="primary"
-          :class="{'bg-yellow-3':!app.iniciativaEditable.objetivo}"
-          label="OBJETIVO DE LA INICIATIVA"
-        />
-        <q-input
-          filled
-          autogrow
-          v-model="app.iniciativaEditable.descripcionBeneficiarios"
-          label-color="primary"
-          :class="{'bg-yellow-3':!app.iniciativaEditable.descripcionBeneficiarios}"
-          label="DESCRIPCIÓN DE LOS BENEFICIARIOS"
-        /> -->
         <div class="q-px-sm">
           <div class="row items-center">
             <span class="text-overline text-primary">CATEGORÍAS ESPECIALES</span>
@@ -203,6 +187,7 @@
               color="accent"
               type="checkbox"
               class="text-grey-7"
+              dense
           >
             <template v-slot:label="opt">
               <div class="row items-center">
@@ -277,17 +262,15 @@
             <div class="text-overline text-primary q-mt-md" style="line-height: 0.5rem;">BENEFICIARIOS</div>
             <div class="text-h6">{{ app.numBenefPorInic[app.iniciativaEditable.Id] || 0 }}</div>
           </q-card-section>
-          <q-separator />
           <q-card-actions align="center">
             <q-btn color="accent" @click="mostrarReporte('reporte')">REPORTE</q-btn>
           </q-card-actions>
         </q-card>
-        <q-card flat bordered class="q-my-md" style="display: none;">
+        <q-card flat bordered class="q-my-md">
           <q-card-section class="q-pa-xs text-center">
             <div class="text-overline text-primary q-mt-md" style="line-height: 0.5rem;">ALIADOS</div>
             <div class="text-h6">{{ app.totalesPorInic[app.iniciativaEditable.Id]?.aliados || 0 }}</div>
           </q-card-section>
-          <q-separator />
           <q-card-actions align="center">
             <q-btn color="accent" @click="mostrarReporte('aliados')">REPORTE</q-btn>
           </q-card-actions>
@@ -297,7 +280,6 @@
             <div class="text-overline text-primary q-mt-md" style="line-height: 0.5rem;">PROYECTOS D.C.</div>
             <div class="text-h6">{{ app.totalesPorInic[app.iniciativaEditable.Id]?.proyectosdc || 0}}</div>
           </q-card-section>
-          <q-separator />
           <q-card-actions align="center">
             <q-btn color="accent" @click="mostrarReporte('proyectosdc')">REPORTE</q-btn>
           </q-card-actions>
@@ -307,6 +289,9 @@
     </div>
     <q-dialog persistant v-model="modal.reporte">
       <FormIniciativaReporte />
+    </q-dialog>
+    <q-dialog persistant v-model="modal.aliados">
+      <FormIniciativaAliados />
     </q-dialog>
     <q-dialog persistant v-model="modal.proyectosdc">
       <FormIniciativaProyectosDC />
@@ -325,6 +310,7 @@
 import { useQuasar } from 'quasar'
 import { ref, computed } from 'vue'
 import FormIniciativaReporte from 'src/components/FormIniciativaReporte.vue'
+import FormIniciativaAliados from 'src/components/FormIniciativaAliados.vue'
 import FormIniciativaProyectosDC from './FormIniciativaProyectosDC.vue'
 import { objectsDiff } from 'assets/utilities'
 import { useAppStore } from 'stores/app'

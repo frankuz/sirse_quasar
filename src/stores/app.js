@@ -106,6 +106,10 @@ export const useAppStore = defineStore('app', {
       {
         label: 'Negocios inclusivos',
         value: 'Negocios inclusivos'
+      },
+      {
+        label: 'Entrega de productos a bancos de alimentos de Colombia',
+        value: 'Entrega de productos a bancos de alimentos de Colombia'
       }
     ],
     iniciativas: [],
@@ -326,6 +330,15 @@ export const useAppStore = defineStore('app', {
               esNuevo: false
             }))
           }
+          if (entity === 'aliados') {
+            this.aliados = [...this.aliados, ...newRecords]
+            this.aliadosActivos = this.aliados.filter(item => item.iniciativaId === this.iniciativaActiva.Id)
+            this.aliadosActivos = this.aliadosActivos.map(item => ({
+              actual: { ...item },
+              editable: { ...item },
+              esNuevo: false
+            }))
+          }
         } else {
           this.showError({
             error: 'Ocurrió un error en la comunicación con el servidor',
@@ -398,6 +411,15 @@ export const useAppStore = defineStore('app', {
               record.actual = { ...record.editable }
               const index = this.proyectosdc.findIndex(item => item.Id === id)
               this.proyectosdc[index] = { ...record.editable }
+            })
+          }
+          if (entity === 'aliados') {
+            editedRecords.forEach(editedRecord => {
+              const id = editedRecord.id
+              const record = this.aliadosActivos.find(item => item.editable.Id === id)
+              record.actual = { ...record.editable }
+              const index = this.aliados.findIndex(item => item.Id === id)
+              this.aliados[index] = { ...record.editable }
             })
           }
         } else {

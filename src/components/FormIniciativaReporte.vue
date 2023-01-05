@@ -95,32 +95,38 @@
         </tr>
       </table>
       <div class="text-weight-bold q-mt-xl">BENEFICIARIOS 2022</div>
-      <table>
-        <tr class="text-center text-primary">
-          <td style="width: 20%;">DPTO / EST / PROV</td>
-          <td>NIÑAS</td>
-          <td>MUJERES JÓVENES</td>
-          <td>ADULTAS</td>
-          <td>ADULTAS MAYORES</td>
-          <td>NIÑOS</td>
-          <td>HOMBRES JÓVENES</td>
-          <td>ADULTOS</td>
-          <td>ADULTOS MAYORES</td>
-        </tr>
-        <tr v-for="(region, i) in app.beneficiariosActivos" :key="i">
-          <td><q-input outlined dense v-model.number="region.editable.region" /></td>
-          <td><q-input outlined dense input-class="text-right" mask="### ### ###" unmasked-value reverse-fill-mask v-model.number="region.editable.mujeresNinas" /></td>
-          <td><q-input outlined dense input-class="text-right" mask="### ### ###" unmasked-value reverse-fill-mask v-model.number="region.editable.mujeresJovenes" /></td>
-          <td><q-input outlined dense input-class="text-right" mask="### ### ###" unmasked-value reverse-fill-mask v-model.number="region.editable.mujeresAdultas" /></td>
-          <td><q-input outlined dense input-class="text-right" mask="### ### ###" unmasked-value reverse-fill-mask v-model.number="region.editable.mujeresMayores" /></td>
-          <td><q-input outlined dense input-class="text-right" mask="### ### ###" unmasked-value reverse-fill-mask v-model.number="region.editable.hombresNinos" /></td>
-          <td><q-input outlined dense input-class="text-right" mask="### ### ###" unmasked-value reverse-fill-mask v-model.number="region.editable.hombresJovenes" /></td>
-          <td><q-input outlined dense input-class="text-right" mask="### ### ###" unmasked-value reverse-fill-mask v-model.number="region.editable.hombresAdultos" /></td>
-          <td><q-input outlined dense input-class="text-right" mask="### ### ###" unmasked-value reverse-fill-mask v-model.number="region.editable.hombresMayores" /></td>
-        </tr>
-      </table>
-      <div class="">
-        <q-btn @click="agregarRegion" label="Agregar fila" color="primary" flat class="q-mr-sm q-mt-md" />
+      <div v-if="app.iniciativaEditable.categorias.includes('Entrega de productos a bancos de alimentos de Colombia')">
+        Los beneficiarios de los bancos de alimentos de Colombia son reportados por Fundación Nutresa
+        de manera centralizada para que los datos no queden duplicados.
+      </div>
+      <div v-else>
+        <table>
+          <tr class="text-center text-primary">
+            <td style="width: 20%;">DPTO / EST / PROV</td>
+            <td>NIÑAS</td>
+            <td>MUJERES JÓVENES</td>
+            <td>ADULTAS</td>
+            <td>ADULTAS MAYORES</td>
+            <td>NIÑOS</td>
+            <td>HOMBRES JÓVENES</td>
+            <td>ADULTOS</td>
+            <td>ADULTOS MAYORES</td>
+          </tr>
+          <tr v-for="(region, i) in app.beneficiariosActivos" :key="i">
+            <td><q-input outlined dense v-model.number="region.editable.region" /></td>
+            <td><q-input outlined dense input-class="text-right" mask="### ### ###" unmasked-value reverse-fill-mask v-model.number="region.editable.mujeresNinas" /></td>
+            <td><q-input outlined dense input-class="text-right" mask="### ### ###" unmasked-value reverse-fill-mask v-model.number="region.editable.mujeresJovenes" /></td>
+            <td><q-input outlined dense input-class="text-right" mask="### ### ###" unmasked-value reverse-fill-mask v-model.number="region.editable.mujeresAdultas" /></td>
+            <td><q-input outlined dense input-class="text-right" mask="### ### ###" unmasked-value reverse-fill-mask v-model.number="region.editable.mujeresMayores" /></td>
+            <td><q-input outlined dense input-class="text-right" mask="### ### ###" unmasked-value reverse-fill-mask v-model.number="region.editable.hombresNinos" /></td>
+            <td><q-input outlined dense input-class="text-right" mask="### ### ###" unmasked-value reverse-fill-mask v-model.number="region.editable.hombresJovenes" /></td>
+            <td><q-input outlined dense input-class="text-right" mask="### ### ###" unmasked-value reverse-fill-mask v-model.number="region.editable.hombresAdultos" /></td>
+            <td><q-input outlined dense input-class="text-right" mask="### ### ###" unmasked-value reverse-fill-mask v-model.number="region.editable.hombresMayores" /></td>
+          </tr>
+        </table>
+        <div class="">
+          <q-btn @click="agregarRegion" label="Agregar fila" color="primary" flat class="q-mr-sm q-mt-md" />
+        </div>
       </div>
       <div class="text-weight-bold q-mt-xl">SOPORTES</div>
       <div
