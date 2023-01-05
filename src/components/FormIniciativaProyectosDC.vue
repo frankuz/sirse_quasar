@@ -62,6 +62,19 @@
       <div class="">
         <q-btn @click="agregarProyecto" label="Agregar proyecto" color="primary" flat class="q-mr-sm q-mt-md" />
       </div>
+      <div class="text-weight-bold q-mt-xl">SOPORTES</div>
+      <div
+        v-for="soporte in app.soportesActivos.proyectosdc"
+        :key="soporte.uuid"
+        class="text-weight-bold text-primary q-my-sm"
+      >
+        <a target="_blank" :href="'https://drive.google.com/file/d/' + soporte.uuid + '/view'">{{ soporte.nombre }}</a>
+      </div>
+      <q-file filled v-model="file" label="Seleccionar archivo de soporte (máximo 50Mb)" max-file-size="52428800" class="q-my-md" style="max-width: 70%">
+        <template v-slot:after>
+          <q-btn  flat icon-right="upload" color="accent" @click="uploadFile('proyectosdc')" label="SUBIR"/>
+        </template>
+      </q-file>
       <!-- <pre>{{ cambiosIniciativa }}</pre>
       <pre>{{ cambiosProyectosPrevios }}</pre>
       <pre>{{ cambiosProyectosNuevos }}</pre> -->
@@ -78,7 +91,7 @@
 // import { useQuasar } from 'quasar'
 // const $q = useQuasar()
 import { objectsDiff, objectNotEmpty } from 'assets/utilities'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useAppStore } from 'stores/app'
 
 const app = useAppStore()
@@ -136,5 +149,11 @@ function guardar () {
     })
     app.createBatch('proyectosdc', data)
   }
+}
+const file = ref(null)
+function uploadFile (tipo) {
+  if (!file.value) return
+  app.uploadFile(file.value, tipo)
+  file.value = null
 }
 </script>

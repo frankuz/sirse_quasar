@@ -117,6 +117,7 @@ export const useAppStore = defineStore('app', {
     proyectosdcActivos: [],
     aliados: [],
     aliadosActivos: [],
+    soportes: [],
     filtrosIniciativas: {
       compania: '',
       estado: '',
@@ -176,7 +177,15 @@ export const useAppStore = defineStore('app', {
       })
       return totales
     },
-    numFiltrosIniciativas: (state) => Object.values(state.filtrosIniciativas).filter(v => v).length
+    numFiltrosIniciativas: (state) => Object.values(state.filtrosIniciativas).filter(v => v).length,
+    soportesActivos: (state) => {
+      const soportes = { reporte: [], proyectosdc: [], aliado: [], iniciativa: [], iniciativaURL: [] }
+      const id = state.iniciativaActiva.Id
+      if (id) {
+        for (const tipo in soportes) soportes[tipo] = state.soportes.filter(s => s.iniciativaId === id && s.tipo === tipo)
+      }
+      return soportes
+    }
   },
   actions: {
     showError (options) {
@@ -230,6 +239,7 @@ export const useAppStore = defineStore('app', {
           this.beneficiarios = arrayToObjects(response.data.beneficiarios)
           this.proyectosdc = arrayToObjects(response.data.proyectosdc)
           this.aliados = arrayToObjects(response.data.aliados)
+          this.soportes = arrayToObjects(response.data.soportes)
           this.filtrosIniciativas.compania = ''
           this.hideWaiting()
         } else {
@@ -397,6 +407,52 @@ export const useAppStore = defineStore('app', {
           })
         }
       }).updateBatch(entity, JSON.stringify(data))
+    },
+    uploadFile (file, tipo) {
+      this.showWaiting('Subiendo archivo')
+      const reader = new FileReader()
+      reader.onloadend = ev => {
+        if (ev.target.error !== null) {
+          this.showError({
+            error: 'Ocurrió un error al leer el archivo',
+            message: ev.target.error
+          })
+        } else {
+          const registro = {
+            negocio: this.negocioActivo,
+            iniciativaId: this.iniciativaActiva.Id,
+            iniciativaUuid: this.iniciativaActiva.uuid,
+            nombre: file.name,
+            tipo
+          }
+          runner.withSuccessHandler(this.uploadFileSuccess).uploadFileToGoogleDrive(ev.target.result, registro)
+        }
+      }
+      reader.readAsDataURL(file)
+    },
+    uploadFileSuccess (res) {
+      this.hideWaiting()
+      let response
+      try { response = JSON.parse(res) } catch (e) { response = false }
+      if (!response) {
+        this.showError({
+          error: 'Ocurrió un error en la comunicación con el servidor',
+          message: 'La respuesta del servidor no es un JSON válido: ' + res
+        })
+      } else if (response.error) {
+        this.showError({
+          error: 'Ocurrió un error al subir el archivo',
+          message: response.error.message
+        })
+      } else if (response.data) {
+        const newRecord = response.data.values
+        this.soportes.push(newRecord)
+      } else {
+        this.showError({
+          error: 'Ocurrió un error en la comunicación con el servidor',
+          message: 'La respuesta del servidor no tiene la estructura esperada: ' + res
+        })
+      }
     },
     readDB (options) {
       runner.withSuccessHandler((response) => {

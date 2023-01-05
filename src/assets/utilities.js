@@ -29,6 +29,11 @@ const localRunner = {
         const res = JSON.stringify({ data: { values: [] } })
         setTimeout(() => callback(res), 3000)
       },
+      uploadFileToGoogleDrive: function (file, registro) {
+        registro.uuid = Math.random() * 10000
+        const res = JSON.stringify({ data: { values: registro } })
+        setTimeout(() => callback(res), 3000)
+      },
       obtenerDatosDelNegocio: function (negocio) {
         const fieldsArray = ['Id', 'Activo', 'negocio', 'uuid', 'nombre', 'compania', 'estado', 'fechaInicio', 'fechaFin', 'tipoInversion', 'grupoInteres', 'pilar', 'dimension', 'asuntoMaterial', 'ods', 'zona', 'categorias', 'responsable', 'descripcion', 'objetivo', 'descripcionBeneficiarios', 'inversion', 'logros', 'numEntidades', 'entidades', 'tipoVoluntariado', 'numVolPresidentesGerentes', 'numVolAltosDirectivos', 'numVolDireccionMedia', 'numVolAdministrativos', 'numVolOperativos', 'numVoluntarios', 'numVoluntarios', 'numHorasPresidentesGerentes', 'numHorasAltosDirectivos', 'numHorasDireccionMedia', 'numHorasAdministrativos', 'numHorasOperativos', 'numHoras', 'dineroDonado', 'tipoCapacidades', 'vulnerabilidad', 'listaCapacidades', 'userMail']
         const fields = {}
@@ -57,7 +62,8 @@ const localRunner = {
             },
             beneficiarios: { values: [], fields: [] },
             proyectosdc: { values: [], fields: [] },
-            aliados: { values: [], fields: [] }
+            aliados: { values: [], fields: [] },
+            soportes: { values: [], fields: [] }
           }
         })
         setTimeout(() => callback(res), 15)

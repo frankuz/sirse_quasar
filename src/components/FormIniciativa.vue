@@ -241,6 +241,26 @@
             </q-card-actions>
           </q-card>
         </q-dialog>
+        <div v-if="app.iniciativaEditable.categorias.includes('Desarrollo de capacidades')">
+          <div class="text-overline text-primary">FORMULACIÓN DE LA INICIATIVA DE DESARROLLO DE CAPACIDADES</div>
+          <div
+            v-for="soporte in app.soportesActivos.iniciativa"
+            :key="soporte.uuid"
+            class="text-weight-bold text-primary q-mb-sm"
+            >
+            <a target="_blank" :href="'https://drive.google.com/file/d/' + soporte.uuid + '/view'">{{ soporte.nombre }}</a>
+          </div>
+          <div v-if="!app.soportesActivos.iniciativa.length">
+            Las iniciativas de Desarrollo de capacidades
+            deben estar formuladas en una copia de
+            <a href="https://docs.google.com/document/d/1WBQSrzKwEHA37Rr4Q6EZJBUSyAPqU3R-3IT36yrBzrE/copy" target="_blank">esta plantilla</a>.
+            <q-file filled v-model="file" label="Seleccionar archivo con la formulación (máximo 50Mb)" max-file-size="52428800" class="q-my-md">
+              <template v-slot:after>
+                <q-btn  flat icon-right="upload" color="accent" @click="uploadFile('iniciativa')" label="SUBIR"/>
+              </template>
+            </q-file>
+          </div>
+        </div>
         <!-- {{ cambios }} -->
       </div>
       <!-- fin panel centro -->
@@ -364,6 +384,12 @@ function ayudaEstado () {
     ok: 'CERRAR',
     style: 'width: 800px;'
   })
+}
+const file = ref(null)
+function uploadFile (tipo) {
+  if (!file.value) return
+  app.uploadFile(file.value, tipo)
+  file.value = null
 }
 // const iniciativa = ref({
 //   id: 'blabla',
