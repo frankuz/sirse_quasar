@@ -115,12 +115,6 @@
           :class="{'bg-yellow-3':!app.iniciativaEditable.zona}"
           label="ZONA"
         />
-        <!-- <q-input
-          filled
-          autogrow
-          label="Documento con la formulación de la iniciativa"
-          hint=""
-        /> -->
       </div>
       <!-- fin panel izquierda -->
       <!-- inicio panel centro -->
@@ -334,8 +328,7 @@ function guardar () {
   const data = { ...cambios.value }
   data.negocio = app.negocioActivo
   data.userMail = app.userMail
-  if (!data.categorias) data.categorias = []
-  data.categorias = JSON.stringify(data.categorias)
+  data.categorias = JSON.stringify(app.iniciativaEditable.categorias)
   if (app.iniciativaEditable.uuid) app.update('iniciativas', app.iniciativaEditable.Id, data)
   else app.create('iniciativas', data)
 }

@@ -58,6 +58,7 @@
     <q-page-container>
       <ListaIniciativas v-if="app.activePage =='listaIniciativas'" />
       <FormIniciativa v-if="app.activePage=='formIniciativa'"/>
+      <FormIniciativaVoluntariosUnicos v-if="app.activePage=='formIniciativaVoluntariosUnicos'"/>
       <DialogWaiting />
       <DialogError />
     </q-page-container>
@@ -88,9 +89,10 @@ import DialogError from 'src/components/DialogError.vue'
 import DialogWaiting from 'src/components/DialogWaiting.vue'
 import FormIniciativa from 'src/components/FormIniciativa.vue'
 import ListaIniciativas from 'src/components/ListaIniciativas.vue'
+import DialogFilterIniciativas from 'src/components/DialogFilterIniciativas.vue'
+import FormIniciativaVoluntariosUnicos from 'src/components/FormIniciativaVoluntariosUnicos.vue'
 import LoggerStore from 'src/components/LoggerStore.vue'
 import { useAppStore } from 'stores/app'
-import DialogFilterIniciativas from 'src/components/DialogFilterIniciativas.vue'
 
 // const $q = useQuasar()
 const app = useAppStore()
